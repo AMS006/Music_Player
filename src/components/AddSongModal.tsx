@@ -83,7 +83,7 @@ export default function AddSongModal({ open, setOpen }: Props) {
                             <IoClose />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                            Sound
+                            Add Songs To Playlist
                         </Typography>
                         <Button autoFocus color="inherit" onClick={handleClose}>
                             save

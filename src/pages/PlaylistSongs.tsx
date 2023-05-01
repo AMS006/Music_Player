@@ -15,11 +15,7 @@ function PlaylistSongs() {
             dispatch(setCurrentSongs(playlist.songs))
     }, [playlist, playLists,localStorage])
     const [open, setOpen] = useState(false)
-    if(!playlist?.songs || playlist?.songs?.length ==0 ){
-        return <div className="w-full">
-          <h2 className="py-6 text-center text-gray-300 font-semibold">No Songs Added Playlist</h2>
-        </div>
-      }
+
     return (
         <>
             <AddSongModal open={open} setOpen={setOpen} />
@@ -28,11 +24,15 @@ function PlaylistSongs() {
                     <h2 className='text-white text-xl font-semibold'>{playlist.name}</h2>
                     <button className="bg-[#c9cad5] text-[#1a1a26] px-3 py-2 font-bold hover:opacity-95 transition-opacity duration-100 rounded" onClick={() => setOpen(!open)}>Add Songs</button>
                 </div>
-                <div className='flex flex-wrap px-3 py-4 gap-6 md:justify-start justify-center'>
-                    {playlist?.songs?.length > 0 && playlist.songs.map((song, idx: number) => (
+                {!playlist?.songs || playlist?.songs?.length ==0?
+                <div className="w-full">
+                    <h2 className="py-6 text-center text-gray-300 font-semibold">No Songs Added in {playlist.name}</h2>
+                </div>
+                 :<div className='flex flex-wrap px-3 py-4 gap-6 md:justify-start justify-center'>
+                    {playlist.songs.map((song, idx: number) => (
                         <SongCard song={song} idx={idx} key={song.key}/>
                     ))}
-                </div>
+                </div>}
             </div>}
         </>
     )
