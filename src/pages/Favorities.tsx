@@ -18,6 +18,11 @@ function Favorities() {
     const favo = JSON.parse(localStorage.getItem('favorities') || "{}")
     setCurrentSongs(favo)
   }, [pathname])
+  if(!favorities || favorities?.length ==0 ){
+    return <div className="w-full">
+      <h2 className="py-6 text-center text-gray-300 font-semibold">No Favorite Song Added </h2>
+    </div>
+  }
   return (
     <div className='text-white text-2xl px-4'>
       <h1 className="py-4 font-semibold">Your Favorite Songs</h1>

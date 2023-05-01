@@ -11,6 +11,11 @@ function Playlist() {
     dispatch(setPlaylist(play))
   }, [localStorage])
   const { playLists } = useAppSelector((state) => state.songs)
+  if(!playLists || playLists?.length ==0 ){
+    return <div className="w-full">
+      <h2 className="py-6 text-center text-gray-300 font-semibold">No Playlist Added</h2>
+    </div>
+  }
   return (
     <>
       <AddPlaylistDialogBox open={dialogOpen} setOpen={setDialogOpen} />

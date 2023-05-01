@@ -41,6 +41,7 @@ function SongCard({ song, idx }: { song: any, idx: number }) {
         if (favorities && favorities.length > 0) {
             let newFavorities: Song[] = favorities?.filter((favorite) => favorite.key !== song.key)
             dispatch(setFavoritiesSong(newFavorities))
+            localStorage.setItem('favorities',JSON.stringify(newFavorities))
         }
     }
     const handlePause = () => {

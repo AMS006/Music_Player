@@ -15,6 +15,11 @@ function PlaylistSongs() {
             dispatch(setCurrentSongs(playlist.songs))
     }, [playlist, playLists,localStorage])
     const [open, setOpen] = useState(false)
+    if(!playlist?.songs || playlist?.songs?.length ==0 ){
+        return <div className="w-full">
+          <h2 className="py-6 text-center text-gray-300 font-semibold">No Songs Added Playlist</h2>
+        </div>
+      }
     return (
         <>
             <AddSongModal open={open} setOpen={setOpen} />
