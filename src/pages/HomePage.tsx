@@ -1,13 +1,20 @@
 import { useSelector } from 'react-redux'
 import SongCard from '../components/SongCard'
 import Loading from '../components/Loding'
+import { useAppDispatch } from '../redux/store'
+import { setErrorEmpty } from '../redux/songReducer'
 
 function HomePage() {
-  const { loading, searchedSongs } = useSelector((state: any) => state.songs)
+  const { loading, searchedSongs,error } = useSelector((state: any) => state.songs)
   if (loading) {
     return (
       <Loading />
     )
+  }
+  const dispatch = useAppDispatch()
+  if(error && error.length>0){
+    window.alert(error)
+    dispatch(setErrorEmpty())
   }
   return (
     <>

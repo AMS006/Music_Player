@@ -11,8 +11,8 @@ function AddPlayListSongCard({ song }: any) {
     const handleAddToPlaylist = () => {
         const playlists = JSON.parse(localStorage.getItem('Playlist') || "{}")
         let playlist: { name?: string, key?: number, songs: Song[] } = { songs: [] };
-
         let otherPlaylist = []
+        setIsAdded(true)
         if (playlists && playlists.length > 0) {
             for (let i = 0; i < playlists.length; i++) {
                 if (playlists[i].key !== Number(id))
@@ -21,12 +21,11 @@ function AddPlayListSongCard({ song }: any) {
                     playlist = playlists[i]
             }
         }
-
         let updatedPlaylist;
         let newSongs: Song[] = [];
         if (playlist !== undefined) {
             updatedPlaylist = { ...playlist }
-            if (updatedPlaylist && updatedPlaylist?.songs?.length > 0)
+            if (updatedPlaylist && updatedPlaylist?.songs?.length >= 0)
                 newSongs = [...updatedPlaylist.songs, song]
 
         }

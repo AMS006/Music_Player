@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getPlaylistSongSearchSuccess, getSongRequest, getSongSearchSuccess } from "./songReducer";
+import { getPlaylistSongSearchSuccess, getSongRequest, getSongSearchSuccess, setError } from "./songReducer";
 
 
 export const getSearchSong = (inputData: string) => async(dispatch : any) =>{
@@ -25,11 +25,12 @@ export const getSearchSong = (inputData: string) => async(dispatch : any) =>{
   
         dispatch(getSongSearchSuccess(data?.tracks?.hits))
       } catch (error) {
-        console.log(error)
+        dispatch(setError())
       }
 }
 
 export const getPlaylistSearchSong = (inputData: string) => async(dispatch : any) =>{
+  let key:string = import.meta.env.VITE_RAPID_API_KEY
   const options = {
       method: 'GET',
       url: 'https://shazam.p.rapidapi.com/search',
@@ -41,7 +42,7 @@ export const getPlaylistSearchSong = (inputData: string) => async(dispatch : any
       },
       headers: {
         'content-type': 'application/octet-stream',
-        'X-RapidAPI-Key': '0c8c01d17cmsh8c9ca657ec90434p17601cjsnfbf0f8fe8f2b',
+        'X-RapidAPI-Key': key,
         'X-RapidAPI-Host': 'shazam.p.rapidapi.com'
       }
     };
@@ -51,6 +52,6 @@ export const getPlaylistSearchSong = (inputData: string) => async(dispatch : any
 
       dispatch(getPlaylistSongSearchSuccess(data?.tracks?.hits))
     } catch (error) {
-      console.log(error)
+      dispatch(setError())
     }
 }

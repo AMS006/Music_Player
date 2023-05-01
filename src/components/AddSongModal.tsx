@@ -16,7 +16,7 @@ import { getPlaylistSearchSong } from '../redux/songActions';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import Loading from './Loding'
 import AddPlayListSongCard from './AddPlayListSongCard';
-import { Song, removePlaylistSongSearch } from '../redux/songReducer';
+import { Song, removePlaylistSongSearch, setErrorEmpty } from '../redux/songReducer';
 import { useParams } from 'react-router-dom';
 
 const Transition = React.forwardRef(function Transition(
@@ -48,8 +48,12 @@ export default function AddSongModal({ open, setOpen }: Props) {
             setSearchData("")
         }
     }
-    const { playLists } = useAppSelector((state) => state.songs)
+    const { playLists,error } = useAppSelector((state) => state.songs)
     const { id } = useParams()
+    if(error && error.length>0){
+        window.alert(error)
+        dispatch(setErrorEmpty())
+    }
     let playlist: { name: string, key: number, songs: Song[] }
     if (playLists && playLists?.length > 0) {
         for (let i = 0; i < playLists.length; i++) {
@@ -97,9 +101,9 @@ export default function AddSongModal({ open, setOpen }: Props) {
                 <div>
                     {loading ? <div> <Loading /> </div> :
                         <List>
-                            {playlistSearchedSong && playlistSearchedSong.length > 0 && playlistSearchedSong.map(({ track }: any) => (
+                            {playlistSearchedSong && playlistSearchedSong.length > 0 && playlistSearchedSong.map(({ track }: any,idx) => (
                                 <>
-                                    <ListItem key={track.key}>
+                                    <ListItem key={idx}>
                                         <AddPlayListSongCard song={track} playlist={playlist} />
                                     </ListItem>
                                     <Divider />

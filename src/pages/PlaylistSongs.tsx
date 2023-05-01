@@ -13,7 +13,7 @@ function PlaylistSongs() {
     useEffect(() => {
         if (playlist && playlist?.songs.length > 0)
             dispatch(setCurrentSongs(playlist.songs))
-    }, [playlist, playLists])
+    }, [playlist, playLists,localStorage])
     const [open, setOpen] = useState(false)
     return (
         <>

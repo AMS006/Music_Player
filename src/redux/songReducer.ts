@@ -31,7 +31,8 @@ interface SongState{
     playLists? : {name:string,key:number,songs:Song[]}[],
     isActive? : boolean,
     isPlaying : boolean,
-    activeSong? : Song
+    activeSong? : Song,
+    error:String,
 }
 const initialState : SongState = {
     loading:false,
@@ -43,7 +44,8 @@ const initialState : SongState = {
     playLists : [],
     isActive: false,
     isPlaying: false,
-    activeSong : {}
+    activeSong : {},
+    error:""
 }
 export const SongSlice = createSlice({
     name:"songs",
@@ -51,6 +53,7 @@ export const SongSlice = createSlice({
     reducers:{
         getSongRequest:(state) =>{
             state.loading = true;
+            state.error = ""
         },
         setCurrentSongs:(state,action: PayloadAction<Song[]>) =>{
             state.currentSongs = action.payload
@@ -94,10 +97,18 @@ export const SongSlice = createSlice({
         },
         closeSong:(state) =>{
             state.isActive = false
+        },
+        setError:(state) =>{
+            state.loading = false
+            state.error = "Sorry ! Internal Server Error Occured"
+        },
+        setErrorEmpty:(state) =>{
+            state.error = ""
+            state.loading = false
         }
     }
 })
 
-export const {getSongRequest,setCurrentSongs,getSongSearchSuccess,getPlaylistSongSearchSuccess,setNextSong,setPrevSong,removePlaylistSongSearch, setActiveSong,setPlaylist,setFavoritiesSong, setPlayPause,closeSong}  = SongSlice.actions
+export const {getSongRequest,setCurrentSongs,setError,setErrorEmpty,getSongSearchSuccess,getPlaylistSongSearchSuccess,setNextSong,setPrevSong,removePlaylistSongSearch, setActiveSong,setPlaylist,setFavoritiesSong, setPlayPause,closeSong}  = SongSlice.actions
 export default SongSlice.reducer;
 
