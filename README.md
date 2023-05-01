@@ -1,5 +1,6 @@
-[![Logo](https://res.cloudinary.com/dkgoet9em/image/upload/v1682944407/TiffinManagment/MusicPlayer_Home_exogv9.png)
 # Music_Player
+
+![WebsiteLayout](https://res.cloudinary.com/dkgoet9em/image/upload/v1682944407/TiffinManagment/MusicPlayer_Home_exogv9.png)
 
 ## Features
 - User Can Search For Different Music and Can listen them
